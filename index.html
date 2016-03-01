@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
 <title>CS102</title>
 <style>
     h1 {background-color: silver;
@@ -14,12 +15,34 @@ text-align: center;
         color: #999999;
         background-color: mintcream;
     }
+    body {
+        background-color: lemonchiffon;
+    }
+    h2#first {
+        color: red;
+    }
+    .h1h2 {
+        background-color: lightgreen;
+    }
+    #org {
+        left: 100px;
+        top: 100px;
+        display: block;
+    }
     </style>
+    <meta charset="UTF-8/>"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-
 <body>
-    <h1>MUSTAFA ASLAN</h1>
-    <p>I will share <h2>My biography</h2> <h2>My research area</h2>and <h2>My hobies</h2>here.
-    <p>I hope you will enjoy surfing on my <strong>website</strong></p></p>
+    <div id="org">
+    <h1>Welcome to my web page</h1>
+    I will share
+    <h2 id="first">My biography</h2>
+    <h2 class="hlh2">My research area</h2>
+    and
+    <h2 style="text-align: right;">My hobies</h2>
+    here
+    <p>I hope you will enjoy surfing on my website </p>
+</div>
 </body>
 </html>
