@@ -4,6 +4,14 @@
     <link rel="stylesheet" href="style.css" type="text/css"/>
 <title>CS102</title>
 <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 50px;
+        text-align: center;
+    }
     h1 {background-color: silver;
 color: gold;
 font-family: monospace;
@@ -30,8 +38,6 @@ text-align: center;
         display: block;
     }
     </style>
-    <meta charset="UTF-8/>"
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
     <div id="org">
@@ -43,6 +49,39 @@ text-align: center;
     <h2 style="text-align: right;">My hobies</h2>
     here
     <p>I hope you will enjoy surfing on my website </p>
-</div>
+    </div>
+    <table border="1" sytle="width:100%;">
+        <caption><b>Science Class Schedules</b></caption>
+        <colgroup style="width:40%; text-align: center; vertical-align: top; background-color: #6B3B3B;"></colgroup>
+        <colgroup span="2" style="width: 40%; text-align: center; vertical-align: top;"></colgroup>
+        <thead style="background-color: red;">
+        <tr>
+            <th>CLASS</th>
+            <th>ROOM</th>
+            <th>DATE</th>
+        </tr>
+        </thead>
+        <tbody style="background-color: yellow;">
+        <tr>
+            <td>CS102</td>
+            <td>Z10</td>
+            <td>MONDAY</td>
+        </tr>
+        </tbody>
+        <tbody style="background-color: #6B3B3B;">
+        <tr>
+            <td>MBG305</td>
+            <td>Z10</td>
+            <td>TUESDAY</td>
+        </tr>
+        </tbody>
+        <tbody style="background-color: mediumblue;">
+        <tr>
+            <td>MBG404</td>
+            <td>Z10</td>
+            <td>WEDNESDAY</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
