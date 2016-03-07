@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #outer {
+                position: absolute;
+                top: 45%;
+                left: 45%;
+                background-color: lightblue;
+                width: 5em;
+                height: 2em;
+            }
+            #inner {
+                position: static;
+                top: 45%;
+                left: 45%;
+                clear: both;
+                vertical-align: middle;
+                text-align: center;
+                background-color: blue;
+                color: whitesmoke;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="outer">
+            <span id="inner">
+            <a style="color:white;" href="http://www.hello.com" target="_blank">Hello</a>
+            </span>
+        </div>
+        <script>
+            $( '#inner').hover
+            function() {
+            $(this).cas('background-color',"green");
+            }, 
+            function() {
+            $(this).cas('background-color',"blue");
+            }
+            
+    </body>
+</html>
