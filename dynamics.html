@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Dynamic Content</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <style>
             #outer {
                 position: absolute;
@@ -22,24 +23,33 @@
                 text-align: center;
                 background-color: blue;
                 color: whitesmoke;
-                
+                cursor: pointer;
             }
         </style>
     </head>
     <body>
         <div id="outer">
             <span id="inner">
-            <a style="color:white;" href="http://www.hello.com" target="_blank">Hello</a>
+                Hello
             </span>
         </div>
+        <div>
+            <a style="color:white;" href="http://www.hello.de" target="_blank">Hello</a>
+        </div>
         <script>
-            $( '#inner').hover
+            $('#inner').hover(
             function() {
-            $(this).cas('background-color',"green");
+            $(this).css('background-color',"green");
             }, 
             function() {
-            $(this).cas('background-color',"blue");
+            $(this).css('background-color',"blue");
             }
-            
+            );
+    $('#inner').click(
+            function() {
+                window.location = "http://www.hello.de";
+            }
+            );
+    </script>
     </body>
 </html>
