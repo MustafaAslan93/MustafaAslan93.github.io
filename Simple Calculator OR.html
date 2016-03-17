@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Simple Calculator OR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+        <form>
+      <input type="text" id="input1">
+      <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="text" id="input2">
+      <input type="button" id="calc" value="calc" onclick="calculate();">
+      <input type="text" id="output" disabled>
+      <br>
+    </form>
+        <div id="error">
+        </div>
+        </div>
+        <script>
+            var i = 1;
+            function calculate() {
+            var in1 = parseInt ($('input1').val());
+            var in2 = parseInt ($('input2').val());
+                if(checkInput(in1,in2)) {
+                    var res =eval(in1 + $('#operator').val() + in2);
+                    $('#output').val(res);
+            } else {
+                $('#error').html("You made "+ i +" mistakes");
+            i++;
+           }
+        }
+            function checkInput1(in1,in2){
+                if(isNaN(in1) || isNaN(in2)) { // || means OR; && means AND; ! means NOT
+                    return false;
+            }
+            return true;
+            }
+            function checkInput2(in1,in2) {
+                if(isNaN(in1)) {
+                    return false;
+                }
+                if(isNaN(in2)) {
+                    return false;
+                }
+                return true;
+                }
+                function checkInput3(in1,in2) {
+                 if(isNaN(in1)) {
+                     return false;
+                 } 
+                 else if(isNaN(in2)) {
+                     return false;
+                 }
+                 return true;
+             }
+        </script>
+    </body>
+</html>
