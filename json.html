@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>JSON Object</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>JSON Object Creation in JavaScript</h2>
+        <p id="demo"></p>
+        <script>
+            var obj={"name":"Mustafa ASLAN","age":"23","gender":"Male", "height":180, "weight":70, "placeofbirth":"Balıkesir", "street":"Sanat St. 6","phone":"555 987 65 43"};
+            var rat=calcRatio(obj.height, obj.weight);
+
+            function calcRatio(height, weight) {
+                return height/weight; 
+            }
+                        $('#demo').append("height weight ratio: " + rat);
+            $("#demo")[0].innerHTML=
+                    obj.name + "<br>" + 
+                    obj.age + "<br>" + 
+                    obj.gender + "<br>" + 
+                    obj.height + "<br>" + 
+                    obj.weight + "<br>" + 
+                    obj.placeofbirth + "<br>" + 
+                    obj.street + "<br>" + 
+                    obj.phone ;
+        </script>
+    </body>
+</html>
