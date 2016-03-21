@@ -17,10 +17,12 @@ $().ready(function(){
          + i + "</div>");
     }
     timer= setInterval(function(){
+        for (var i=0; i<10; i++) {
         left= Math.floor((Math.random()*1000)+1);
         top= Math.floor((Math.random()*800)+1);
-        $("#5").css("left",left+"px");
-        $("#5").css("top",top+"px");
-        $("#5").html(id++);
+        $("#" + i).css("left",left+"px");
+        $("#" + i).css("top",top+"px");
+        $("#" + i).html(id++);
+    }
     },2000);
     });
