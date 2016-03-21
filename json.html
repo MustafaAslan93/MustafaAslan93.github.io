@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>JSON Object</title>
@@ -15,22 +10,21 @@ and open the template in the editor.
         <h2>JSON Object Creation in JavaScript</h2>
         <p id="demo"></p>
         <script>
-            var obj={"name":"Mustafa ASLAN","age":"23","gender":"Male", "height":180, "weight":70, "placeofbirth":"Balıkesir", "street":"Sanat St. 6","phone":"555 987 65 43"};
-            var rat=calcRatio(obj.height, obj.weight);
-
-            function calcRatio(height, weight) {
-                return height/weight; 
-            }
-                        $('#demo').append("height weight ratio: " + rat);
-            $("#demo")[0].innerHTML=
+            var obj={"name":"Mustafa ASLAN","age":23,"gender":"Male", "height":180, "weight":70, "placeofbirth":"Balıkesir", "address":"Sanat St", "phone":5559876543};
+                $("#demo")[0].innerHTML=
                     obj.name + "<br>" + 
                     obj.age + "<br>" + 
                     obj.gender + "<br>" + 
                     obj.height + "<br>" + 
                     obj.weight + "<br>" + 
                     obj.placeofbirth + "<br>" + 
-                    obj.street + "<br>" + 
-                    obj.phone ;
-        </script>
+                    obj.address + "<br>" + 
+                    obj.phone + "<br>";
+          var rat=calcRatio(obj.height, obj.weight);
+            $('#demo').append("height weight ratio: " + rat + "<br>");
+            function calcRatio(height, weight) {
+                return height/weight; 
+                }
+            </script>
     </body>
 </html>

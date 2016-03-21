@@ -14,9 +14,37 @@ and open the template in the editor.
     <body>
         <div id="avg"></div>
         <script>
-            var students={students:[
-                    {"name":"ali", ""
-            ]
+            var students = {students:[
+                    {"name":"ali", "age":25, "height":198, "weight":87},
+                    {"name":"veli", "age":36, "height":185, "weight":95},
+                    {"name":"can", "age":42, "height":173, "weight":78}]};
+            var avgAge = calcAvgAge(students);
+            $('#avg').append("Average age of students: " + avgAge + "<br>");
+            var avgHeight = calcAvgHeight(students);
+            $('#avg').append("Average height of students: " + avgHeight + "<br>");
+            var avgWeight = calcAvgWeight(students);
+            $('#avg').append("Average weight of students: " + avgWeight + "<br>");
+            function calcAvgAge(obj){
+                var totalAge = 0;
+                for(var i = 0; i < obj.students.length; i++){
+                    totalAge += obj.students[i].age;
+                }
+                return totalAge / obj.students.length;
+            }
+            function calcAvgHeight(obj){
+                var totalHeight = 0;
+                for(var i = 0; i < obj.students.length; i++){
+                    totalHeight += obj.students[i].height;
+                }
+                return totalHeight / obj.students.length;
+            }
+            function calcAvgWeight(obj){
+                var totalWeight = 0;
+                for(var i = 0; i < obj.students.length; i++){
+                    totalWeight += obj.students[i].weight;
+                }
+                return totalWeight / obj.students.length;
+            }
         </script>
     </body>
 </html>
