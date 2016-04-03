@@ -13,44 +13,54 @@ and open the template in the editor.
     </head>
     <body>
         <form>
+             <input type="text" id="input1">
+            <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+            </select>
       <input type="text" id="input2">
       <input type="button" id="calc" value="calc" onclick="calculate();">
       <input type="text" id="output" disabled>
+      <button onclick="goBack()">Go Back</button>
+      <button onclick="goForward()">Go Forward</button>
       <br>
     </form>
         <div id="error">
         </div>
         <script>
-            function calculate() {
-                var input = $('#input1').val();
+            function goBack() {
+              window.history.back();
+             }
+             function goForward() {
+               window.history.forward();
+             }
+                  function calculate(){
+                  var input1 = $('#input1').val();
+                  var input2 = $('#input2').val();
+                  var num1 = parseInt(input1);
+                  var num2 = parseInt(input2);
+                  if(isNaN(num1) || isNaN(num2)){
+                  $("<p style='color:red;'>not a number</p>").appendTo('#error');
+                 }else{
+          var operator = $('#operator').val();
+          var res = eval(num1 + operator + num2);
+          $('#output').val(res);
+          console.log(eval(num1 + operator + num2));
+        }
+      }
                 var res = doCalc(input,disp);
                 
-            }
             function doCalc(input,cbf) {
                 sleep(100);
                 return "done with calculation";
             }
-            function sleep(dur) {
-                $.ajax({url:"http://www.iyte.edu.tr", success:function(result){
-                $("div").html(result);
-  }});
-                    $.ajax({
-        url:'http://www.google.com/',
-        type: 'GET'
-        dataType: 'html',
-        success:function(content,code)
-        {
-            alert(code);
-            $('body').html(content);
-        }
-        });        
-    };
                 for(var i=0; i<1000*dur; i++) {
                     var x =Math.sqrt(i) ;
-                    if(x%10==0)
+                    if(x %10==0)
                         console.log(i + " ->" + x);
                 }
-            }
             function disp(show) {
                 $('#output').val(show);
             }
