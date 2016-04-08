@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <title>Drag n Drop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <style>
+            ul
+            {
+                list-style-type: none;
+            }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {//Anything in here will be executed
+                //once the document is fully loaded.
+                $("#arrow").draggable();
+                $("#target").droppable(
+                        {
+                            drop: function () {
+                                $("#arrow").draggable("disable");
+                                $("#target").draggable("disable");
+                                $("#target").css("background-color", "red").html("");
+                                $("#arrow").css("background-color", "red").html("");
+                            }
+                        }
+                );
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+<!--            <div id="target">
+                Target
+            </div>
+            <div id="arrow">
+                Arrow
+            </div> -->
+            <ul id="numName">
+                <li id="t1">eins</li>
+                <li id="t2">zwei</li>
+                <li id="t3">drei</li>
+                <li id="t4">vier</li>
+                <li id="t5">fünf</li>
+                <li id="t6">sechs</li>
+                <li id="t7">sieben</li>
+                <li id="t8">acht</li>
+                <li id="t9">neun</li>
+                <li id="t10">zehn</li>
+            </ul>
+            <ul id="numText">
+                <li id="d1">1</li>
+                <li id="d2">2</li>
+                <li id="d3">3</li>
+                <li id="d4">4</li>
+                <li id="d5">5</li>
+                <li id="d6">6</li>
+                <li id="d7">7</li>
+                <li id="d8">8</li>
+                <li id="d9">9</li>
+                <li id="d10">10</li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $ ("#arrow").draggable();
+                $("#target").droppable();
+                var numText=['eins', 'zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn'];
+                var ulText=$('#numName');
+                var ulNum=$('#numNumeric');
+                for(var i=0; i< numText.length; i++){
+                    ulText.append('<li id="t'+(i)+'">'+numText[i]+'</li');
+                     ulNum.append('<li id="n'+(i)+'">'+ (i)+'</li');
+                }
+                for(var i=0; i< numText.length; i++){
+                    $("#n" + i).draggable();
+                    $("#n" + i).data("index",{index:i});
+                 $("#t" + i).data("index",{index:i});
+             $("#t" + i).droppable({drop: function (event,ui){
+                     var ni=ui.draggable.attr("id");
+                     var ti =this.id;
+                     var niElem=$('#' + ni);
+                     var tiElem=$('#' + ti);
+                     if(niElem.data("index").index=== tiElem.data("index").index){
+                         //correct
+                         niElem.draggable("disable");
+                         niElem.css("display","hide");
+                     } else{
+                         niElem.css("left",left+"px");
+                         niElem.css("top", top+"px");
+                     }
+                }
+            
+        </script>
+    </body>
+</html>
