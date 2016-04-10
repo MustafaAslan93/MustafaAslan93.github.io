@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Numbers Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+     <style>
+            ul {
+                list-style-type: none;
+            }
+            #order {
+                display: none;
+            }
+            #numName{
+                background-color: lemonchiffon;
+                color: yellowgreen;
+                border-style: solid;
+                border-width: 10px;
+                border-top-color: mediumvioletred;
+                border-bottom-color: navy;
+                border-left-color: indianred;
+                border-right-color: black;
+                font-family: cursive;
+                font-style: oblique;
+                font-size: 17px;
+                text-align: center;
+            }
+            #numNumeric {
+                background-color: lightskyblue;
+                color: lavender;
+                border-style: solid;
+                border-width: 10px;
+                border-top-color: mediumvioletred;
+                border-bottom-color: navy;
+                border-left-color: black;
+                border-right-color: indianred;
+                font-family: cursive;
+                font-style: oblique;
+                font-size: 17px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul id="numName"></ul>
+            <ul id="numNumeric"></ul>
+            <ul id="order"></ul>
+        </div>
+        <script type="text/javascript">
+            var colors = ['pink', 'gray', 'green', 'brown', 'red', 'yellow', 'aqua', 'purple', 'blue', 'coral', 'black'];
+            var numText = ['Zéro', 'Un', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit', 'Neuf', 'Dix'];
+            var ulText = $('#numName');
+            var ulNum = $('#numNumeric');
+            var dimx = $('body').width();
+            var dimy = $('body').height();
+            for(var i = 0; i < numText.length; i++){
+            ulText.append('<li id="t' + (i) + '">' + numText[i] + '</li>');
+            ulNum.append('<li id="n' + (i) + '">' + (i) + '</li>');
+            }
+            var hidden = 0;
+            var n=0;
+            for(var i = 0; i < numText.length; i++){
+                $("#n" + i).data("index", {index: i});
+                $("#t" + i).data("index", {index: i});
+                $("#n" + i).draggable();
+                $("#t" + i).droppable({drop: function (event, ui) {
+                    var ni = ui.draggable.attr("id");
+                    var ti = this.id;
+                    var niElem = $('#' + ni);
+                    var tiElem = $('#' + ti);
+                    if(niElem.data("index").index === tiElem.data("index").index){
+                        niElem.draggable("disable");
+                        niElem.css("display", "none");
+                        if(n>=0 && n<10){
+                            var colorname = colors[n];
+                            tiElem.css("background-color",colorname);
+                            n++;
+                        }
+                        hidden++;
+                        if(hidden === numText.length){
+                            $('ul').randomize();
+                            $('#numName').sortable({
+                                start: function(event, ui){
+                                },
+                                update: function(event, ui){
+                                    var ordered = 0;
+                                    for(var j = 0; j < numText.length; j++){
+                                        if($('#t' + j).index() === j)
+                                            ordered++;
+                                    }
+                                    if(ordered === numText.length)
+                                        alert("done");
+                                }
+                            });
+                        }
+                    } else{
+                        var left = Math.floor((Math.random() * (dimx - 20)) + 10);
+                        var top = Math.floor((Math.random() * (dimy - 20)) + 10);
+                        niElem.css("left", left+"px"); 
+                        niElem.css("top", top+"px");
+                    }
+                }});
+            }
+            $.fn.randomize = function (selector) {
+                var $elems = selector ? $(this).find(selector) : $(this).children(),
+                        $parents = $elems.parent();
+                $parents.each(function () {
+                    $(this).children(selector).sort(function () {
+                        return Math.round(Math.random()) - 0.5;
+                    }).detach().appendTo(this);
+                });
+                return this;
+            };
+            $('ul').randomize();
+        </script>
+    </body>
+</html>
