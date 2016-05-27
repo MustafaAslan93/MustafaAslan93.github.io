@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="svg.css"/>
+<title>IZMIR INSTITUTE OF TECHNOLOGY BIOINFORMATICS CENTER</title>
+<style>
+    div {
+                margin-bottom: 5px;
+            }
+            label {
+                display: block;
+                float: left;
+                width: 150px;
+                text-align: left;
+                font-weight: normal;
+                margin-right: 10px;
+            }
+            input.submit {
+                margin-left:  110px;
+            }
+body {
+margin:0;
+padding:0;
+font-family: Sans-Serif;
+line-height: 1.5em;
+}
+#header {
+background: #ccc;
+height: 100px;
+text-align: center;
+}
+
+#header h1 {
+margin: 0;
+padding-top: 15px;
+
+}
+main {
+padding-bottom: 10010px;
+margin-bottom: -10000px;
+float: left;
+width: 100%;
+}
+#nav {
+padding-bottom: 10010px;
+margin-bottom: -10000px;
+float: left;
+width: 230px;
+margin-left: -100%;
+background: #eee;
+}
+#footer {
+clear: left;
+width: 100%;
+background: #ccc;
+text-align: center;
+padding: 4px 0;
+}
+#wrapper {
+overflow: hidden;
+}
+
+#content {
+margin-left: 230px;
+}
+.innertube {
+margin: 15px;
+margin-top: 0;
+}
+p {
+color: #555;
+}
+nav ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+nav ul a {
+color: darkgreen;
+text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+    <header id="header">
+<div class="innertube">
+    <h1>IZMIR INSTITUTE OF TECHNOLOGY </h1>
+    <h1> BIOINFORMATICS CENTER </h1>
+</div>
+</header>
+<div id="wrapper">
+<main>
+<div id="content">
+<div class="innertube"></div>
+</div>
+</main>
+<nav id="nav">
+    
+<div class="innertube">
+            <div id="menu">
+    <ul>
+        <li style="text-align: left; text-decoration: underline;">
+            <a class='urllink' href='http://www.iyte.edu.tr/AnaSayfa.aspx?d=ENG' title='' rel='nofollow'>IYTE</a></li>
+    </ul>
+            </div>
+    <h3 style="color:red;"> Sign in to IZBC</h3>
+<div>
+            <form action="/form-processing-script" method="post" enctype="multipart/form-data" name="f1" id="f1">
+                <div>
+                <label for="Name">Name and Surname:</label> 
+                <input type="text" name="login" placeholder="Name and Surname"/><br/>
+                </div>
+                <div>
+                <label for="E-mail">E-mail address:</label>
+                <input type="text" name="login" placeholder="email@address.com" /><br/>
+                </div>
+                <div>
+                <label for="Password">Password:</label>
+                <input type="text" name="login" placeholder="***********"/><br/>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Submit"/>
+                </div>
+            </form>
+        </div>
+<ul>
+<li><a href="http://mbg.iyte.edu.tr/">About</a></li>
+<li><a href="http://mbg.iyte.edu.tr/faculty-alphabetical/">People</a></li>
+<li ><a href="http://www.nature.com/index.html">Resources</a></li>
+<li><a href="http://mbg.iyte.edu.tr/news/">Announcements</a></li>
+<li><a href="http://mbg.iyte.edu.tr/contact/">Contact</a></li>
+</ul>
+</div>
+    
+    <div class="body"></div>
+        <script>
+
+    var width = 960,
+        height = 600,
+        root;
+
+    var force = d3.layout.force()
+        .linkDistance(175)
+        .charge(-200)
+        .gravity(0)
+        .size([width, height])
+        .on("tick", tick);
+
+    var svg = d3.select(".body").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("id", "svgId");
+
+    var link = svg.selectAll(".link"),
+        node = svg.selectAll(".node");
+
+    d3.json("d3.js", function(error, json) {
+      root = json;
+      update();
+    });
+
+    function update() {
+      var nodes = flatten(root),
+          links = d3.layout.tree().links(nodes);
+
+      // Restart the force layout.
+      force
+          .nodes(nodes)
+          .links(links)
+          .start();
+
+      // Update links.
+      link = link.data(links, function(d) { return d.target.id; });
+
+      link.exit().remove();
+
+      link.enter().insert("line", ".node")
+          .attr("class", "link");
+
+      // Update nodes.
+      node = node.data(nodes, function(d) { return d.id; });
+
+      node.exit().remove();
+
+      var nodeEnter = node.enter().append("g")
+          .attr("class", "node")
+          .on("click", click)
+          .call(force.drag)
+          .attr("href", function(d) { return d.link; });
+
+    nodeEnter.append("svg:a")
+      .attr("xlink:href", function(d){return d.link;})
+      .append("circle")
+          .attr("r", function(d) { return Math.sqrt(d.size) / 10 || 4.5; });
+
+      nodeEnter.append("text")
+          .attr("dy", ".35em")
+          .text(function(d) { return d.name; });
+
+      node.select("circle")
+          .style("fill", color);
+    }
+
+    function tick() {
+      link.attr("x1", function(d) { return d.source.x; })
+          .attr("y1", function(d) { return d.source.y; })
+          .attr("x2", function(d) { return d.target.x; })
+          .attr("y2", function(d) { return d.target.y; });
+
+      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    }
+
+    function color(d) {
+      return d._children ? "#3182bd" // collapsed package
+          : d.children ? "#2F9BC1" // expanded package
+          : "#fd8d3c"; // leaf node
+    }
+
+    // Toggle children on click.
+    function click(obj) {
+      if (d3.event.defaultPrevented) return; // ignore drag
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+      update();
+    }
+
+    // Returns a list of all nodes under the root.
+    function flatten(root) {
+      var nodes = [], i = 0;
+
+      function recurse(node) {
+        if (node.children) node.children.forEach(recurse);
+        if (!node.id) node.id = ++i;
+        nodes.push(node);
+      }
+
+      recurse(root);
+      return nodes;
+    }
+
+    </script>
+</nav>
+</div>
+<footer id="footer">
+<div class="innertube">
+    <p style="text-align: right;">Mustafa ASLAN</p>
+    <p style="text-align: right;">Izmir Institute of Technology</p>
+</div>
+</footer>
+</body>
+</html>
